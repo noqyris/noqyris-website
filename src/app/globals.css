@@ -450,94 +450,6 @@ body {
 
 /* ---- hero accents & scroll choreography ---- */
 
-/* The brand's lime square, promoted to a 3D cube: it floats, slowly tumbles in
-   space, and tilts toward the cursor (JS — see HeroCube.tsx). Nested layers each
-   own ONE transform (float = translateY, tilt = rotate via JS, spin = rotate via
-   CSS) so they never clash; perspective lives on the outer wrapper. */
-.hero-cube-3d {
-  --cube: clamp(2.5rem, 4vw, 4.25rem);
-  position: absolute;
-  width: var(--cube);
-  height: var(--cube);
-  perspective: 900px;
-  pointer-events: none;
-}
-
-.hero-cube-3d::before {
-  content: "";
-  position: absolute;
-  inset: -70%;
-  background: radial-gradient(
-    closest-side,
-    rgba(212, 255, 79, 0.22),
-    transparent 72%
-  );
-  filter: blur(6px);
-  z-index: -1;
-}
-
-.cube-float,
-.cube-tilt,
-.cube-spin {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-}
-
-.cube-spin {
-  transform: rotateX(-18deg) rotateY(0deg);
-}
-
-.cube-face {
-  position: absolute;
-  width: var(--cube);
-  height: var(--cube);
-  border: 1px solid var(--color-accent);
-  background: rgba(212, 255, 79, 0.07);
-  box-shadow: inset 0 0 1.4rem rgba(212, 255, 79, 0.18);
-}
-
-/* front + top a touch brighter so the tumble reads as a solid object */
-.cube-front {
-  transform: translateZ(calc(var(--cube) / 2));
-  background: rgba(212, 255, 79, 0.15);
-}
-.cube-back {
-  transform: rotateY(180deg) translateZ(calc(var(--cube) / 2));
-}
-.cube-right {
-  transform: rotateY(90deg) translateZ(calc(var(--cube) / 2));
-}
-.cube-left {
-  transform: rotateY(-90deg) translateZ(calc(var(--cube) / 2));
-}
-.cube-top {
-  transform: rotateX(90deg) translateZ(calc(var(--cube) / 2));
-  background: rgba(212, 255, 79, 0.18);
-}
-.cube-bottom {
-  transform: rotateX(-90deg) translateZ(calc(var(--cube) / 2));
-}
-
-@keyframes cube-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-16px);
-  }
-}
-
-@keyframes cube-spin {
-  from {
-    transform: rotateX(-18deg) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(-18deg) rotateY(360deg);
-  }
-}
-
 /* Minimal scroll cue — a lime glint travelling down a hairline. */
 .scroll-cue {
   position: relative;
@@ -567,14 +479,6 @@ body {
 /* The hero scroll-away + decorative parallax are now driven cross-browser by
    Framer Motion (HeroStage / Parallax / ScrollReveal) — see src/components/motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .cube-float {
-    animation: cube-float 7s ease-in-out infinite;
-  }
-
-  .cube-spin {
-    animation: cube-spin 18s linear infinite;
-  }
-
   .scroll-cue::after {
     animation: scroll-cue 2s var(--ease-out-expo) infinite;
   }

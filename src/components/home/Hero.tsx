@@ -10,8 +10,6 @@ import { Button } from "@/components/ui/Button";
 import { KineticHeadline } from "@/components/motion/KineticHeadline";
 import { HeroField } from "@/components/motion/HeroField";
 import { HeroStage } from "@/components/motion/HeroStage";
-import { HeroVideo } from "@/components/motion/HeroVideo";
-import { HeroCube } from "@/components/motion/HeroCube";
 import { CountUp } from "@/components/motion/CountUp";
 import { Magnetic } from "@/components/motion/Magnetic";
 
@@ -28,15 +26,9 @@ export function Hero({ lang }: { lang: Locale }) {
 
   return (
     <section className="relative flex min-h-[78svh] items-end overflow-hidden pt-20 pb-16 md:pt-20 md:pb-20">
-      {site.heroVideo && <HeroVideo src={site.heroVideo} />}
-      <div className="hero-glow" aria-hidden="true" />
+      {/* The scroll-scrubbed journey video (global, behind everything) is the
+          hero backdrop too — no separate hero background here. */}
       <HeroField />
-      {/* Signature 3D brand cube — the lime square, in space: floats, tumbles,
-          tilts toward the cursor. Desktop flourish. */}
-      <HeroCube
-        className="hero-cube-3d hidden md:block"
-        style={{ top: "26%", right: "12%" }}
-      />
       <HeroStage className="relative w-full">
       <Container className="relative flex flex-col gap-8">
         <div className="flex flex-wrap items-center gap-x-8 gap-y-2">

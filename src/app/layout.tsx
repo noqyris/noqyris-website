@@ -6,6 +6,7 @@ import { getDictionary } from "@/i18n";
 import { Spotlight } from "@/components/motion/Spotlight";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { JourneySwitcher } from "@/components/motion/JourneySwitcher";
 import { Splash } from "@/components/motion/Splash";
 import { SplashController } from "@/components/motion/SplashController";
 import "./globals.css";
@@ -73,6 +74,7 @@ export default function RootLayout({
         <Splash />
         <SplashController />
         <SmoothScroll />
+        <JourneySwitcher />
         <div className="noise-overlay" aria-hidden="true" />
         <ScrollProgress />
         {children}

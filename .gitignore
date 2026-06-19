@@ -44,3 +44,13 @@ brand/video/_frames/
 
 # QA MCP screenshot output
 tools/qa-mcp/shots/
+
+# raw hero video source (re-encode into public/hero with ffmpeg)
+.hero-source.mp4
+
+# raw scroll-journey source (re-encode into public/scroll with ffmpeg)
+.scroll-source.mp4
+
+.scroll-source-v2.mp4
+
+.scroll-source-v3.mp4

@@ -13,10 +13,6 @@ export const site = {
   /** Optional /public path to a real founder photo — research says a real
    *  face beats a monogram; drop one in when ready. */
   founderImage: undefined as string | undefined,
-  /** Optional hero background video — base path under /public, no extension
-   *  (expects <base>.mp4, <base>.webm, <base>-poster.jpg). null = the dark
-   *  canvas. See docs/AI-ASSETS.md. e.g. "/hero/hero" */
-  heroVideo: null as string | null,
   /** Public revenue/MRR shown on /changelog. Kept hidden while it's $0 — a zero
    *  reads as risk to prospective clients. Set a real string once it's worth
    *  showing (e.g. "$1,240 MRR") and the dashboard card appears automatically. */
