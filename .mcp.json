@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "noqyris-qa": {
+      "command": "node",
+      "args": ["tools/qa-mcp/server.mjs"],
+      "env": {
+        "BASE_URL": "http://localhost:3000"
+      }
+    }
+  }
+}

@@ -1,0 +1,787 @@
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --color-bg: #0b0b0c;
+  --color-surface: #121214;
+  --color-surface-2: #1a1a1d;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-fg: #f2f2f0;
+  --color-fg-muted: #9c9ca3;
+  --color-fg-faint: #8a8a92; /* ~5.3:1 on --color-bg — legible at 12px (fluency → trust) */
+  --color-accent: #d4ff4f;
+  --color-accent-dim: rgba(212, 255, 79, 0.14);
+  --color-accent-ink: #0b0b0c;
+
+  --font-display: var(--font-display), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Source Code Pro",
+    Menlo, monospace;
+
+  --radius-card: 16px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --text-display-xl: clamp(2.5rem, 9vw, 9.5rem);
+  --text-display-lg: clamp(2.5rem, 5.5vw, 4.5rem);
+  --text-display-md: clamp(1.75rem, 3vw, 2.75rem);
+  --text-heading: clamp(1.5rem, 3vw, 2.25rem);
+  --text-marquee: clamp(3.5rem, 9vw, 8rem);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* ---- typography helpers ---- */
+
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 450;
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+.text-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-heading);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+/* Serif accent word inside display headlines; rendered ~4% larger for
+   optical parity with Clash Display. */
+.serif-em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.04em;
+  letter-spacing: 0;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ---- motion ---- */
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+/* opacity/transform only — animating font-variation-settings here would (a)
+   force per-frame layout during load and (b) with `forwards` fill permanently
+   override the --wght hover effect (animation origin beats author styles). */
+@keyframes char-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .availability-dot {
+    animation: pulse-dot 2.4s ease-in-out infinite;
+  }
+
+  .kinetic-char {
+    opacity: 0;
+    animation: char-in 0.55s var(--ease-out-expo) forwards;
+    animation-delay: calc(var(--i) * 12ms);
+  }
+
+  /* tighter stagger on small screens — the headline is the LCP element */
+  @media (max-width: 640px) {
+    .kinetic-char {
+      animation-delay: calc(var(--i) * 7ms);
+    }
+  }
+
+  .hero-follow {
+    opacity: 0;
+    animation: fade-up 0.6s var(--ease-out-expo) forwards;
+    animation-delay: var(--delay, 200ms);
+  }
+
+  .marquee-track {
+    animation: marquee-scroll 40s linear infinite;
+  }
+
+  /* hover gated to hover-capable devices — sticky :hover on touch would
+     leave the marquee frozen after a tap */
+  @media (hover: hover) {
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+
+  /* WCAG 2.2.2: keyboard users can pause the auto-scroll by focusing it */
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Hidden state gated behind html.js so no-JS visitors see everything. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(5px);
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.7s var(--ease-out-expo),
+      filter 0.7s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  html.js .reveal.is-inview {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  /* Stronger reveal for big headings — rises and settles out of a soft blur. */
+  html.js .reveal-rise {
+    opacity: 0;
+    transform: translateY(2.4rem) scale(0.985);
+    filter: blur(10px);
+    transition:
+      opacity 0.85s var(--ease-out-expo),
+      transform 0.95s var(--ease-out-expo),
+      filter 0.85s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  html.js .reveal-rise.is-inview {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  /* Ambient, decorative drift of the hero's lime glow. Transform-only, so it
+     stays on the compositor without a permanent will-change hint. */
+  .hero-glow {
+    animation: glow-drift 17s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes glow-drift {
+  from {
+    transform: translate3d(-2.5%, -1.5%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2.5%, 1.5%, 0) scale(1.08);
+  }
+}
+
+.kinetic-char {
+  display: inline-block;
+  font-variation-settings: "wght" var(--wght, 450);
+}
+
+/* ---- marquee ---- */
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  /* skip rastering the ~10k px promoted text layer while offscreen */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 14rem;
+}
+
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+}
+
+/* JS-driven (scroll-velocity) mode — the rAF loop owns the transform */
+.marquee-track.js-drive {
+  animation: none;
+}
+
+.marquee-text {
+  font-family: var(--font-display);
+  font-size: var(--text-marquee);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-fg-faint);
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+@media (hover: hover) {
+  .marquee:hover .marquee-text {
+    color: var(--color-accent);
+    -webkit-text-stroke-color: var(--color-accent);
+  }
+}
+
+.marquee:focus-within .marquee-text {
+  color: var(--color-accent);
+  -webkit-text-stroke-color: var(--color-accent);
+}
+
+/* ---- misc ---- */
+
+/* Film-grain overlay. A small pre-baked SVG tile repeated as a background —
+   a full-viewport feTurbulence element would re-rasterize at device
+   resolution on every resize (incl. iOS toolbar collapse). */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.hairline-t {
+  border-top: 1px solid var(--color-line);
+}
+
+/* Cursor spotlight on [data-spotlight] cards (driven by Spotlight.tsx). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-spotlight] {
+    position: relative;
+  }
+
+  [data-spotlight]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-out-expo);
+    background: radial-gradient(
+      320px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      rgba(212, 255, 79, 0.08),
+      transparent 70%
+    );
+  }
+
+  [data-spotlight].spot-on::after {
+    opacity: 1;
+  }
+}
+
+/* Accent-inverted block (lime bg, ink text) — selection and focus rings
+   must flip with it. */
+.section-inverted ::selection {
+  background: var(--color-accent-ink);
+  color: var(--color-accent);
+}
+
+.section-inverted a:focus-visible,
+.section-inverted button:focus-visible {
+  outline-color: var(--color-accent-ink);
+}
+
+/* Soft accent glow behind the hero — gives the dark canvas depth without
+   touching the monochrome + single-accent discipline. */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      560px circle at 18% 22%,
+      rgba(212, 255, 79, 0.07),
+      transparent 70%
+    ),
+    radial-gradient(
+      640px circle at 85% 80%,
+      rgba(255, 255, 255, 0.03),
+      transparent 70%
+    );
+}
+
+/* Dot grid laid over product-cover gradients. */
+.cover-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+/* Outline (stroked, transparent-fill) display text. */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-fg-faint);
+}
+
+/* Giant editorial section numerals — background ornament, top-right. */
+.section-numeral {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+}
+
+/* Oversized outline wordmark in the footer. */
+.footer-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-fg-faint);
+  user-select: none;
+  transition: -webkit-text-stroke-color 0.4s var(--ease-out-expo);
+}
+
+.footer-wordmark:hover {
+  -webkit-text-stroke-color: var(--color-accent);
+}
+
+/* Scroll-driven parallax (best-effort, off the main thread). Progressive
+   enhancement: browsers without scroll timelines just render these static. */
+@keyframes numeral-parallax {
+  from {
+    transform: translateY(3.5rem);
+  }
+  to {
+    transform: translateY(-3.5rem);
+  }
+}
+
+@keyframes wordmark-parallax {
+  from {
+    transform: translateX(-3%);
+  }
+  to {
+    transform: translateX(3%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .section-numeral {
+      animation: numeral-parallax linear both;
+      animation-timeline: view();
+    }
+
+    .footer-wordmark {
+      animation: wordmark-parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+/* ---- hero accents & scroll choreography ---- */
+
+/* The brand's lime square, promoted to a 3D cube: it floats, slowly tumbles in
+   space, and tilts toward the cursor (JS — see HeroCube.tsx). Nested layers each
+   own ONE transform (float = translateY, tilt = rotate via JS, spin = rotate via
+   CSS) so they never clash; perspective lives on the outer wrapper. */
+.hero-cube-3d {
+  --cube: clamp(2.5rem, 4vw, 4.25rem);
+  position: absolute;
+  width: var(--cube);
+  height: var(--cube);
+  perspective: 900px;
+  pointer-events: none;
+}
+
+.hero-cube-3d::before {
+  content: "";
+  position: absolute;
+  inset: -70%;
+  background: radial-gradient(
+    closest-side,
+    rgba(212, 255, 79, 0.22),
+    transparent 72%
+  );
+  filter: blur(6px);
+  z-index: -1;
+}
+
+.cube-float,
+.cube-tilt,
+.cube-spin {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.cube-spin {
+  transform: rotateX(-18deg) rotateY(0deg);
+}
+
+.cube-face {
+  position: absolute;
+  width: var(--cube);
+  height: var(--cube);
+  border: 1px solid var(--color-accent);
+  background: rgba(212, 255, 79, 0.07);
+  box-shadow: inset 0 0 1.4rem rgba(212, 255, 79, 0.18);
+}
+
+/* front + top a touch brighter so the tumble reads as a solid object */
+.cube-front {
+  transform: translateZ(calc(var(--cube) / 2));
+  background: rgba(212, 255, 79, 0.15);
+}
+.cube-back {
+  transform: rotateY(180deg) translateZ(calc(var(--cube) / 2));
+}
+.cube-right {
+  transform: rotateY(90deg) translateZ(calc(var(--cube) / 2));
+}
+.cube-left {
+  transform: rotateY(-90deg) translateZ(calc(var(--cube) / 2));
+}
+.cube-top {
+  transform: rotateX(90deg) translateZ(calc(var(--cube) / 2));
+  background: rgba(212, 255, 79, 0.18);
+}
+.cube-bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--cube) / 2));
+}
+
+@keyframes cube-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes cube-spin {
+  from {
+    transform: rotateX(-18deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-18deg) rotateY(360deg);
+  }
+}
+
+/* Minimal scroll cue — a lime glint travelling down a hairline. */
+.scroll-cue {
+  position: relative;
+  width: 1px;
+  height: 3.25rem;
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 45%;
+  background: linear-gradient(to bottom, transparent, var(--color-accent));
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(260%);
+  }
+}
+
+/* The hero scroll-away + decorative parallax are now driven cross-browser by
+   Framer Motion (HeroStage / Parallax / ScrollReveal) — see src/components/motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .cube-float {
+    animation: cube-float 7s ease-in-out infinite;
+  }
+
+  .cube-spin {
+    animation: cube-spin 18s linear infinite;
+  }
+
+  .scroll-cue::after {
+    animation: scroll-cue 2s var(--ease-out-expo) infinite;
+  }
+}
+
+a,
+button,
+summary {
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+}
+
+/* ---- brand splash ---- */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--color-bg);
+  overflow: hidden;
+  /* curtain rises after a brief hold on the formed logo, revealing the site */
+  animation: splash-curtain 0.72s cubic-bezier(0.76, 0, 0.24, 1) 1.55s forwards;
+}
+
+/* Pre-paint gate (inline script in the root layout) and reduced motion both
+   remove the splash outright — no animation, no flash. */
+html.splash-skip .splash {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .splash {
+    display: none;
+  }
+}
+
+.splash-logo {
+  position: relative;
+  display: flex;
+  /* baseline-align so the cube's bottom edge sits on the text baseline — it
+     lands exactly where the period does in the navbar "noqyris." logo */
+  align-items: baseline;
+  gap: 0.05em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.75rem, 11vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--color-fg);
+}
+
+/* ambient lime aura behind the wordmark — fades in for premium depth */
+.splash-logo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 135%;
+  height: 320%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    closest-side,
+    rgba(212, 255, 79, 0.09),
+    transparent 72%
+  );
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  animation: splash-aura 0.7s ease-out 0.5s forwards;
+}
+
+.splash-word {
+  display: inline-flex;
+}
+
+.splash-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.2em) scale(0.55);
+  /* each letter pops in as the cube sweeps over it — stagger synced to the
+     cube's 0.48s rightward sweep (0.08s × 6 letters), starting at frame 0. */
+  animation: splash-pop 0.36s cubic-bezier(0.2, 1.4, 0.35, 1) forwards;
+  animation-delay: calc(var(--i) * 0.08s);
+}
+
+/* The cube writes the word, split across three nested nodes so its motions never
+   clash: travel = translateX (the rightward sweep), drop = translateY (hops),
+   dot = glow. Motion from frame 0 — no dead start — for a strong social hook. */
+
+/* outermost: races right like a cursor, laying each letter down. `--sweep` is the
+   measured word width (em, scales with the clamped font); backwards fill parks it
+   over the "n" at frame 0, then it sweeps to its home as the dot. */
+.splash-dot-travel {
+  --sweep: 3.44em;
+  display: inline-block;
+  animation: splash-sweep 0.48s linear 0s both;
+}
+
+/* vertical motion: a couple of springy hops while it sweeps right. */
+.splash-dot-drop {
+  display: inline-block;
+  animation: splash-hop 0.24s linear 0s 2 forwards;
+}
+
+/* inner node = the lime cube. It writes big (scaled up) as a bold cursor, then
+   settles down to the period's exact size at the baseline — finishing as the dot
+   in "noqyris." like the navbar logo. settle uses transform (scale, origin at
+   the baseline), ignite uses box-shadow/filter, so they don't clash. */
+.splash-dot {
+  display: block;
+  width: 0.18em;
+  height: 0.18em;
+  border-radius: 0.04em;
+  background: var(--color-accent);
+  transform-origin: 50% 100%;
+  animation:
+    splash-settle 0.34s cubic-bezier(0.34, 1.2, 0.5, 1) 0.48s both,
+    splash-ignite 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.76s both;
+}
+
+/* cursor sweep: parked left over the first letter, glides to its home (the dot)
+   as the wordmark writes in beneath it. linear so the letter stagger stays synced. */
+@keyframes splash-sweep {
+  from {
+    transform: translateX(calc(-1 * var(--sweep)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* springy hop while sweeping — quick launch, accelerated fall (fakes gravity). */
+@keyframes splash-hop {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  45% {
+    transform: translateY(-160%);
+    animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* the bold cursor cube shrinks to the period's size, anchored at the baseline —
+   resolving into the dot of "noqyris." */
+@keyframes splash-settle {
+  from {
+    transform: scale(2.3);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* the settled dot glows once, then holds a faint steady ember (sized for the
+   small period, since the dot is scale 1 by the time this runs) */
+@keyframes splash-ignite {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 255, 79, 0);
+    filter: brightness(1);
+  }
+  35% {
+    box-shadow: 0 0 1em 0.1em rgba(212, 255, 79, 0.9);
+    filter: brightness(1.45);
+  }
+  100% {
+    box-shadow: 0 0 0.45em 0.02em rgba(212, 255, 79, 0.3);
+    filter: brightness(1.12);
+  }
+}
+
+@keyframes splash-aura {
+  to {
+    opacity: 1;
+  }
+}
+
+/* punchy letter pop — scales up past 1 then settles, snapping into place */
+@keyframes splash-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(0.2em) scale(0.55);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes splash-curtain {
+  to {
+    transform: translateY(-100%);
+  }
+}
