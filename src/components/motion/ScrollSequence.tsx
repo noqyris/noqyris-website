@@ -5,22 +5,15 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { sliceForPath, type Slice } from "./journeyChapters";
 
-/** Desktop + motion-on only (preloading a frame sequence is desktop-only). */
+/** Motion-on only — runs on mobile and desktop (reduced-motion shows poster). */
 function useEnabled() {
   return useSyncExternalStore(
     (cb) => {
-      const a = window.matchMedia("(min-width: 768px)");
-      const b = window.matchMedia("(prefers-reduced-motion: reduce)");
-      a.addEventListener("change", cb);
-      b.addEventListener("change", cb);
-      return () => {
-        a.removeEventListener("change", cb);
-        b.removeEventListener("change", cb);
-      };
+      const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+      m.addEventListener("change", cb);
+      return () => m.removeEventListener("change", cb);
     },
-    () =>
-      window.matchMedia("(min-width: 768px)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     () => false,
   );
 }

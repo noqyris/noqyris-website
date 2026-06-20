@@ -67,36 +67,17 @@ const VERSIONS: Record<
  * Switching remounts the sequence so the new frames load cleanly.
  */
 export function JourneySwitcher() {
-  const [v, choose] = usePersistedVersion();
+  // Switch UI is hidden (we ship V2). The version system + all assets are kept
+  // so the preview pill can be re-enabled later — just read the chosen version.
+  const [v] = usePersistedVersion();
   const cfg = VERSIONS[v];
 
   return (
-    <>
-      <ScrollSequence
-        key={`seq-${v}`}
-        base={cfg.base}
-        frameCount={cfg.frames}
-        poster={cfg.poster}
-      />
-
-      {/* preview A/B/C switch */}
-      <div className="fixed right-5 bottom-5 z-40 flex items-center gap-1 rounded-full border border-line bg-bg/70 p-1 backdrop-blur-md">
-        {(["1", "2", "3"] as V[]).map((n) => (
-          <button
-            key={n}
-            type="button"
-            onClick={() => choose(n)}
-            aria-pressed={v === n}
-            className={`mono-label rounded-full px-3 py-1.5 transition-colors ${
-              v === n
-                ? "bg-accent text-accent-ink"
-                : "text-fg-muted hover:text-fg"
-            }`}
-          >
-            {VERSIONS[n].label}
-          </button>
-        ))}
-      </div>
-    </>
+    <ScrollSequence
+      key={`seq-${v}`}
+      base={cfg.base}
+      frameCount={cfg.frames}
+      poster={cfg.poster}
+    />
   );
 }

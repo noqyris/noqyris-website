@@ -1,20 +1,23 @@
-// The journey video is one continuous film; each route owns a slice of its
-// timeline (fractions 0..1). Scrolling a page scrubs within its slice, and
-// navigating winds the film to the next page's slice — so moving deeper into
-// the site moves deeper into the journey, instead of snapping back to frame 0.
+// The journey video is one continuous film. The home page plays the WHOLE film
+// (scrolling it scrubs the entire timeline). Every other route winds to a
+// specific second of that film and scrubs a short window there — so navigating
+// "rewinds/forwards" to that moment instead of snapping back to the start.
 export type Slice = readonly [number, number];
 
-// Contiguous, non-overlapping, narrative order. Home is the opening
-// (spark → MacBook) and the longest page, so it gets the largest slice;
-// `start` (the CTA) gets the closing settle.
+// 361 frames @ 24fps.
+const DURATION = 15.04;
+const at = (from: number, to: number): Slice =>
+  [from / DURATION, to / DURATION] as const;
+
+// Home = full film. Sub-pages = distinct seconds along the journey.
 const CHAPTERS: Record<string, Slice> = {
-  "": [0.0, 0.4], // home
-  services: [0.4, 0.55],
-  products: [0.55, 0.68],
-  process: [0.68, 0.78],
-  changelog: [0.78, 0.88],
-  about: [0.88, 0.95],
-  start: [0.95, 1.0], // CTA — the closing beat
+  "": [0, 1], // home — the whole video
+  services: at(5.5, 6.5),
+  products: at(7.0, 8.0),
+  process: at(8.5, 9.5),
+  changelog: at(10.3, 11.3),
+  about: at(12.2, 13.2),
+  start: at(13.9, DURATION), // CTA — the closing settle
 };
 
 const HOME: Slice = CHAPTERS[""];

@@ -505,12 +505,17 @@ textarea:focus-visible {
   position: fixed;
   inset: 0;
   z-index: 100;
-  display: grid;
-  place-items: center;
   background: var(--color-bg);
   overflow: hidden;
-  /* curtain rises after a brief hold on the formed logo, revealing the site */
-  animation: splash-curtain 0.72s cubic-bezier(0.76, 0, 0.24, 1) 1.55s forwards;
+  /* the intro video plays, then the curtain rises to reveal the site */
+  animation: splash-curtain 0.72s cubic-bezier(0.76, 0, 0.24, 1) 4.7s forwards;
+}
+
+.splash-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Pre-paint gate (inline script in the root layout) and reduced motion both
@@ -521,166 +526,6 @@ html.splash-skip .splash {
 @media (prefers-reduced-motion: reduce) {
   .splash {
     display: none;
-  }
-}
-
-.splash-logo {
-  position: relative;
-  display: flex;
-  /* baseline-align so the cube's bottom edge sits on the text baseline — it
-     lands exactly where the period does in the navbar "noqyris." logo */
-  align-items: baseline;
-  gap: 0.05em;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2.75rem, 11vw, 6rem);
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: var(--color-fg);
-}
-
-/* ambient lime aura behind the wordmark — fades in for premium depth */
-.splash-logo::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 135%;
-  height: 320%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    closest-side,
-    rgba(212, 255, 79, 0.09),
-    transparent 72%
-  );
-  opacity: 0;
-  z-index: -1;
-  pointer-events: none;
-  animation: splash-aura 0.7s ease-out 0.5s forwards;
-}
-
-.splash-word {
-  display: inline-flex;
-}
-
-.splash-char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(0.2em) scale(0.55);
-  /* each letter pops in as the cube sweeps over it — stagger synced to the
-     cube's 0.48s rightward sweep (0.08s × 6 letters), starting at frame 0. */
-  animation: splash-pop 0.36s cubic-bezier(0.2, 1.4, 0.35, 1) forwards;
-  animation-delay: calc(var(--i) * 0.08s);
-}
-
-/* The cube writes the word, split across three nested nodes so its motions never
-   clash: travel = translateX (the rightward sweep), drop = translateY (hops),
-   dot = glow. Motion from frame 0 — no dead start — for a strong social hook. */
-
-/* outermost: races right like a cursor, laying each letter down. `--sweep` is the
-   measured word width (em, scales with the clamped font); backwards fill parks it
-   over the "n" at frame 0, then it sweeps to its home as the dot. */
-.splash-dot-travel {
-  --sweep: 3.44em;
-  display: inline-block;
-  animation: splash-sweep 0.48s linear 0s both;
-}
-
-/* vertical motion: a couple of springy hops while it sweeps right. */
-.splash-dot-drop {
-  display: inline-block;
-  animation: splash-hop 0.24s linear 0s 2 forwards;
-}
-
-/* inner node = the lime cube. It writes big (scaled up) as a bold cursor, then
-   settles down to the period's exact size at the baseline — finishing as the dot
-   in "noqyris." like the navbar logo. settle uses transform (scale, origin at
-   the baseline), ignite uses box-shadow/filter, so they don't clash. */
-.splash-dot {
-  display: block;
-  width: 0.18em;
-  height: 0.18em;
-  border-radius: 0.04em;
-  background: var(--color-accent);
-  transform-origin: 50% 100%;
-  animation:
-    splash-settle 0.34s cubic-bezier(0.34, 1.2, 0.5, 1) 0.48s both,
-    splash-ignite 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.76s both;
-}
-
-/* cursor sweep: parked left over the first letter, glides to its home (the dot)
-   as the wordmark writes in beneath it. linear so the letter stagger stays synced. */
-@keyframes splash-sweep {
-  from {
-    transform: translateX(calc(-1 * var(--sweep)));
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* springy hop while sweeping — quick launch, accelerated fall (fakes gravity). */
-@keyframes splash-hop {
-  0% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  45% {
-    transform: translateY(-160%);
-    animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* the bold cursor cube shrinks to the period's size, anchored at the baseline —
-   resolving into the dot of "noqyris." */
-@keyframes splash-settle {
-  from {
-    transform: scale(2.3);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-/* the settled dot glows once, then holds a faint steady ember (sized for the
-   small period, since the dot is scale 1 by the time this runs) */
-@keyframes splash-ignite {
-  0% {
-    box-shadow: 0 0 0 0 rgba(212, 255, 79, 0);
-    filter: brightness(1);
-  }
-  35% {
-    box-shadow: 0 0 1em 0.1em rgba(212, 255, 79, 0.9);
-    filter: brightness(1.45);
-  }
-  100% {
-    box-shadow: 0 0 0.45em 0.02em rgba(212, 255, 79, 0.3);
-    filter: brightness(1.12);
-  }
-}
-
-@keyframes splash-aura {
-  to {
-    opacity: 1;
-  }
-}
-
-/* punchy letter pop — scales up past 1 then settles, snapping into place */
-@keyframes splash-pop {
-  0% {
-    opacity: 0;
-    transform: translateY(0.2em) scale(0.55);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(0) scale(1.06);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 

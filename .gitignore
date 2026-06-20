@@ -54,3 +54,9 @@ tools/qa-mcp/shots/
 .scroll-source-v2.mp4
 
 .scroll-source-v3.mp4
+
+# marketing render artifacts
+/reel/
+
+# raw splash intro source (re-encode into public/splash.mp4)
+.splash-source.mp4

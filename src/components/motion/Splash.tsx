@@ -1,39 +1,18 @@
-import type { CSSProperties } from "react";
-
-const WORD = "noqyris";
-
 /**
- * Brand splash — rendered server-side (in the document on first paint, so no
- * flash of content before it appears). The whole sequence is pure CSS
- * (globals.css): from frame 0 the lime cube races right like a cursor — hopping —
- * laying each letter of the wordmark down (pop) in its wake over a soft lime aura,
- * landing as the final dot with a glow flash, then the curtain reveals the site.
+ * Brand splash — a short intro video (the animated "noqyris." wordmark) that
+ * covers the screen on the first visit of a session, then the curtain
+ * (globals.css) rises to reveal the site. Rendered server-side so it's in the
+ * document on first paint (no flash of content before it shows).
  *
- * Shown once per session and skipped under reduced motion — both gated by the
- * inline script in the root layout (adds `splash-skip` before paint).
- * `SplashController` clears it from the DOM and unlocks scroll when it's done.
+ * The <video> intentionally has no `src` here: SplashController sets the source
+ * and plays it (muted) only when the splash actually runs, so repeat visits and
+ * reduced-motion never fetch the clip. Once-per-session + reduced-motion are
+ * gated by the inline script in the root layout (adds `splash-skip` pre-paint).
  */
 export function Splash() {
   return (
     <div id="splash" className="splash" aria-hidden="true">
-      <div className="splash-logo">
-        <span className="splash-word">
-          {WORD.split("").map((ch, i) => (
-            <span
-              key={i}
-              className="splash-char"
-              style={{ "--i": i } as CSSProperties}
-            >
-              {ch}
-            </span>
-          ))}
-        </span>
-        <span className="splash-dot-travel">
-          <span className="splash-dot-drop">
-            <span className="splash-dot" />
-          </span>
-        </span>
-      </div>
+      <video className="splash-video" muted playsInline preload="none" />
     </div>
   );
 }
