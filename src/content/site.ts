@@ -4,15 +4,10 @@
 export const site = {
   name: "noqyris",
   url: "https://noqyris.com",
-  email: "contact@noqyris.com",
+  email: "team@noqyris.com",
   tagline: "Independent software studio",
   description:
     "Independent software studio shipping its own SaaS products and building custom applications and AI systems for clients worldwide.",
-  founder: "Djordje Subotic",
-  founderInitials: "DS",
-  /** Optional /public path to a real founder photo — research says a real
-   *  face beats a monogram; drop one in when ready. */
-  founderImage: undefined as string | undefined,
   /** Public revenue/MRR shown on /changelog. Kept hidden while it's $0 — a zero
    *  reads as risk to prospective clients. Set a real string once it's worth
    *  showing (e.g. "$1,240 MRR") and the dashboard card appears automatically. */

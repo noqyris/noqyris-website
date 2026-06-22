@@ -8,17 +8,12 @@ import { Eyebrow } from "@/components/ui/SectionHeading";
 import { SocialIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { CtaSection } from "@/components/shared/CtaSection";
-import { FounderAvatar } from "@/components/shared/FounderCard";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { personJsonLd } from "@/lib/seo";
 
 export function AboutView({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
 
   return (
     <>
-      <JsonLd data={personJsonLd(lang)} />
-
       <section>
         <Container className="flex flex-col gap-8 pt-20 pb-24 md:pt-28 md:pb-32">
           <Eyebrow>{dict.aboutPage.eyebrow}</Eyebrow>
@@ -27,24 +22,8 @@ export function AboutView({ lang }: { lang: Locale }) {
             <span className="serif-em text-accent">{dict.aboutPage.h1.em}</span>
             {dict.aboutPage.h1.post}
           </h1>
-          <div className="flex items-center gap-5">
-            <FounderAvatar size="size-20" textSize="text-2xl" />
-            <div>
-              <p className="font-display text-xl font-medium">
-                {site.founder}
-              </p>
-              <p className="mono-label mt-1 text-fg-faint">
-                {dict.site.location}
-              </p>
-            </div>
-          </div>
           <div className="flex max-w-2xl flex-col gap-5 text-lg text-fg-muted">
-            <p>
-              {t(dict.aboutPage.lead, {
-                name: site.name,
-                founder: site.founder,
-              })}
-            </p>
+            <p>{t(dict.aboutPage.lead, { name: site.name })}</p>
             <p>{dict.aboutPage.para2}</p>
           </div>
         </Container>

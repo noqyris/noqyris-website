@@ -161,7 +161,7 @@ const en = {
     h1: { pre: "Have something to", em: "build", post: "?" },
     start: "Start a project →",
     founderLine:
-      "You'll talk directly to {founder}, the person who builds it. {promise}",
+      "You'll talk directly to the team that builds it. {promise}",
   },
 
   entryOfferCard: {
@@ -199,7 +199,7 @@ const en = {
       "SaaS development, custom applications, and AI solutions — scoped, shipped, and supported by an independent software studio.",
     eyebrow: "Services",
     h1: { pre: "What gets", em: "built", post: "for clients." },
-    lede: "Independent software development that ships its own products — and applies the same standard to yours. Three services, one process, one person accountable.",
+    lede: "Independent software development that ships its own products — and applies the same standard to yours. Three services, one process, one team accountable.",
     listAria: "Service list",
     learnMore: "Learn more",
     startSmallAria: "The first step",
@@ -261,7 +261,7 @@ const en = {
       "The noqyris process end to end: a reply within one business day, a low-risk Roadmap Sprint, weekly working-software demos, and a handover you own outright.",
     eyebrow: "Process",
     h1: { pre: "No surprises, by ", em: "design", post: "." },
-    hero: "Hiring a studio you found on the internet is a trust exercise — so here is the entire engagement, end to end, before you spend a cent: what happens, when, what it costs, and what you can hold me to at every step.",
+    hero: "Hiring a studio you found on the internet is a trust exercise — so here is the entire engagement, end to end, before you spend a cent: what happens, when, what it costs, and what you can hold us to at every step.",
     start: "Start a project",
     timelineAria: "Engagement timeline",
     timelineEyebrow: "The engagement, end to end",
@@ -269,7 +269,7 @@ const en = {
       {
         stage: "Day 0",
         name: "Your message",
-        body: "You write — through the project form or plain email. You get a personal reply within one business day with an honest read: what I'd build, roughly what it costs, and whether I'm the right person at all. If not, I'll say so and suggest who is.",
+        body: "You write — through the project form or plain email. You get a personal reply within one business day with an honest read: what we'd build, roughly what it costs, and whether we're the right fit at all. If not, we'll say so and suggest who is.",
       },
       {
         stage: "Day 1–3",
@@ -298,7 +298,7 @@ const en = {
       },
     ],
     guaranteesAria: "Guarantees",
-    guaranteesEyebrow: "What you can hold me to",
+    guaranteesEyebrow: "What you can hold us to",
     guaranteesH1: { pre: "Guaranteed, in ", em: "writing", post: "." },
     pricingPre: "Every build is scoped and quoted in the Roadmap Sprint — see ",
     pricingSep: ", ",
@@ -307,7 +307,7 @@ const en = {
     whoAria: "Who you work with",
     whoEyebrow: "Who you work with",
     founderNote:
-      "One person, end to end: the engineer who scopes your project is the one who builds, ships, and answers for it. Nothing gets lost between departments, because there are none.",
+      "End to end, the engineer who scopes your project is the one who builds, ships, and answers for it. Nothing gets lost between departments, because there are none.",
   },
 
   startPage: {
@@ -315,10 +315,10 @@ const en = {
     metaDescription:
       "Tell noqyris what you're building — SaaS, custom application, or AI solution — and get a personal reply within one business day.",
     eyebrow: "Start a project",
-    h1: { pre: "Tell me what you're ", em: "building", post: "." },
+    h1: { pre: "Tell us what you're ", em: "building", post: "." },
     briefAria: "Project brief",
     founderNote:
-      "Your email lands in my inbox, not a CRM. I design, build, and ship every project personally — what you read here is who you work with.",
+      "Your email reaches the team directly, not a CRM. We design, build, and ship every project ourselves — what you read here is who you work with.",
     whatNext: "What happens next",
     steps: [
       {
@@ -326,8 +326,8 @@ const en = {
         body: "The form below builds a short brief and opens it in your own mail app. Two minutes, no account, nothing stored here.",
       },
       {
-        name: "I reply — within a day",
-        body: "A personal answer within one business day, usually within hours: an honest read on fit, rough shape, and the right next step. If I'm not the right person, I'll say so and point you somewhere better.",
+        name: "We reply — within a day",
+        body: "A personal answer within one business day, usually within hours: an honest read on fit, rough shape, and the right next step. If we're not the right fit, we'll say so and point you somewhere better.",
       },
       {
         name: "We scope it",
@@ -335,7 +335,7 @@ const en = {
       },
     ],
     plainEmailPre: "Prefer plain email? Write to ",
-    plainEmailMid: " — same person, same promise. Want the full picture first? Read ",
+    plainEmailMid: " — same team, same promise. Want the full picture first? Read ",
     plainEmailLink: "how an engagement works",
     plainEmailPost: ".",
   },
@@ -361,7 +361,7 @@ const en = {
       "The story, principles, and standards behind noqyris — an independent software studio shipping its own SaaS products and building custom apps and AI systems for clients.",
     eyebrow: "About",
     h1: { pre: "One studio, one ", em: "standard", post: "." },
-    lead: "{name} is the independent software studio of {founder} — a developer who ships SaaS products under the studio's own name and builds custom applications and AI systems for clients worldwide.",
+    lead: "{name} is an independent software studio that ships its own SaaS products under its own name and builds custom applications and AI systems for clients worldwide.",
     para2:
       "Products and client work are one practice. The tooling, infrastructure, and judgment sharpened by running real products go straight into client projects — and client problems keep the products honest.",
     howWeWork: "How it works",
@@ -423,7 +423,7 @@ const en = {
     optional: "optional",
     building: "What are you building?",
     budget: "Budget",
-    budgetHint: "a real range helps me scope it right",
+    budgetHint: "a real range helps us scope it right",
     timeline: "Timeline",
     description: "What should exist that doesn't yet?",
     descriptionHint: "a few sentences is plenty (max {max} characters)",
@@ -505,7 +505,7 @@ const en = {
     },
     start: {
       alt: "Start a project with noqyris",
-      title: "Tell me what you're",
+      title: "Tell us what you're",
       em: "building.",
       subtitle: "A reply within one business day",
     },

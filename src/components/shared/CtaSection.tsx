@@ -44,7 +44,6 @@ export function CtaSection({ lang }: { lang: Locale }) {
           </Link>
           <p className="max-w-md text-sm text-accent-ink/70">
             {t(dict.cta.founderLine, {
-              founder: site.founder,
               promise: getOffer(lang).responsePromise,
             })}
           </p>

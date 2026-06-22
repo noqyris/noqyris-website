@@ -8,7 +8,7 @@ import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
-import { FounderCard } from "@/components/shared/FounderCard";
+import { WhoNote } from "@/components/shared/WhoNote";
 import { CtaSection } from "@/components/shared/CtaSection";
 
 export function ProcessView({ lang }: { lang: Locale }) {
@@ -135,7 +135,7 @@ export function ProcessView({ lang }: { lang: Locale }) {
             <Eyebrow>{dict.processPage.whoEyebrow}</Eyebrow>
           </Reveal>
           <Reveal className="max-w-xl">
-            <FounderCard note={dict.processPage.founderNote} lang={lang} />
+            <WhoNote note={dict.processPage.founderNote} />
           </Reveal>
         </Container>
       </section>

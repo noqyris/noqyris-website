@@ -8,7 +8,7 @@ import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { AvailabilityBadge } from "@/components/ui/Badge";
 import { IntakeForm } from "@/components/start/IntakeForm";
-import { FounderCard } from "@/components/shared/FounderCard";
+import { WhoNote } from "@/components/shared/WhoNote";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function StartView({ lang }: { lang: Locale }) {
@@ -53,7 +53,7 @@ export function StartView({ lang }: { lang: Locale }) {
 
           <div className="flex flex-col gap-8">
             <Reveal delay={80}>
-              <FounderCard note={dict.startPage.founderNote} lang={lang} />
+              <WhoNote note={dict.startPage.founderNote} />
             </Reveal>
             <Reveal delay={140}>
               <div className="flex flex-col gap-5">

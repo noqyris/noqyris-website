@@ -159,7 +159,7 @@ const sr = {
     h1: { pre: "Imate nešto da", em: "izgradite", post: "?" },
     start: "Pokreni projekat →",
     founderLine:
-      "Razgovaraćete direktno sa {founder}, osobom koja to gradi. {promise}",
+      "Razgovaraćete direktno sa timom koji to gradi. {promise}",
   },
 
   entryOfferCard: {
@@ -197,7 +197,7 @@ const sr = {
       "Razvoj SaaS-a, aplikacije po meri i AI rešenja — definisani, isporučeni i podržani od strane nezavisnog softverskog studija.",
     eyebrow: "Usluge",
     h1: { pre: "Šta se", em: "gradi", post: "za klijente." },
-    lede: "Nezavisan razvoj softvera koji isporučuje sopstvene proizvode — i primenjuje isti standard na vaše. Tri usluge, jedan proces, jedna osoba odgovorna.",
+    lede: "Nezavisan razvoj softvera koji isporučuje sopstvene proizvode — i primenjuje isti standard na vaše. Tri usluge, jedan proces, jedan tim odgovoran.",
     listAria: "Lista usluga",
     learnMore: "Saznaj više",
     startSmallAria: "Prvi korak",
@@ -259,7 +259,7 @@ const sr = {
       "Proces noqyris od početka do kraja: odgovor u roku od jednog radnog dana, Roadmap Sprint bez rizika, nedeljne demonstracije softvera u radu i primopredaja koju posedujete.",
     eyebrow: "Proces",
     h1: { pre: "Bez iznenađenja, ", em: "po dizajnu", post: "." },
-    hero: "Angažovati studio koji ste našli na internetu je vežba poverenja — zato je ovde cela saradnja, od početka do kraja, pre nego što potrošite ijedan cent: šta se dešava, kada, koliko košta i za šta me možete držati odgovornim u svakom koraku.",
+    hero: "Angažovati studio koji ste našli na internetu je vežba poverenja — zato je ovde cela saradnja, od početka do kraja, pre nego što potrošite ijedan cent: šta se dešava, kada, koliko košta i za šta nas možete držati odgovornim u svakom koraku.",
     start: "Pokreni projekat",
     timelineAria: "Vremenska linija saradnje",
     timelineEyebrow: "Saradnja, od početka do kraja",
@@ -267,7 +267,7 @@ const sr = {
       {
         stage: "Dan 0",
         name: "Vaša poruka",
-        body: "Pišete — kroz formu za projekat ili običan email. Dobijate lični odgovor u roku od jednog radnog dana sa iskrenom procenom: šta bih izgradio, otprilike koliko košta i da li sam uopšte prava osoba. Ako nisam, reći ću to i predložiti ko jeste.",
+        body: "Pišete — kroz formu za projekat ili običan email. Dobijate lični odgovor u roku od jednog radnog dana sa iskrenom procenom: šta bismo izgradili, otprilike koliko košta i da li smo uopšte pravi izbor. Ako nismo, reći ćemo to i predložiti ko jeste.",
       },
       {
         stage: "Dan 1–3",
@@ -296,7 +296,7 @@ const sr = {
       },
     ],
     guaranteesAria: "Garancije",
-    guaranteesEyebrow: "Za šta me možete držati odgovornim",
+    guaranteesEyebrow: "Za šta nas možete držati odgovornim",
     guaranteesH1: { pre: "Garantovano, u ", em: "pisanoj formi", post: "." },
     pricingPre: "Svaka gradnja je definisana i ponuđena u Roadmap Sprintu — pogledajte ",
     pricingSep: ", ",
@@ -305,7 +305,7 @@ const sr = {
     whoAria: "Sa kim radite",
     whoEyebrow: "Sa kim radite",
     founderNote:
-      "Jedna osoba, od početka do kraja: inženjer koji definiše obim vašeg projekta je onaj koji ga gradi, isporučuje i odgovara za njega. Ništa se ne izgubi između odeljenja, jer ih nema.",
+      "Od početka do kraja, inženjer koji definiše obim vašeg projekta je onaj koji ga gradi, isporučuje i odgovara za njega. Ništa se ne izgubi između odeljenja, jer ih nema.",
   },
 
   startPage: {
@@ -313,10 +313,10 @@ const sr = {
     metaDescription:
       "Recite noqyris šta gradite — SaaS, aplikaciju po meri ili AI rešenje — i dobijte lični odgovor u roku od jednog radnog dana.",
     eyebrow: "Pokreni projekat",
-    h1: { pre: "Recite mi šta ", em: "gradite", post: "." },
+    h1: { pre: "Recite nam šta ", em: "gradite", post: "." },
     briefAria: "Brief projekta",
     founderNote:
-      "Vaš email stiže u moj inbox, ne u CRM. Svaki projekat lično osmišljavam, gradim i isporučujem — ono što čitate ovde jeste osoba sa kojom radite.",
+      "Vaš email stiže direktno timu, ne u CRM. Svaki projekat sami osmišljavamo, gradimo i isporučujemo — ono što čitate ovde jeste tim sa kojim radite.",
     whatNext: "Šta sledi",
     steps: [
       {
@@ -324,8 +324,8 @@ const sr = {
         body: "Forma ispod pravi kratak brief i otvara ga u vašoj sopstvenoj mail aplikaciji. Dva minuta, bez naloga, ništa se ne čuva ovde.",
       },
       {
-        name: "Odgovaram — u roku od jednog dana",
-        body: "Lični odgovor u roku od jednog radnog dana, obično u roku od nekoliko sati: iskrena procena uklapanja, gruba forma i pravi sledeći korak. Ako nisam prava osoba, reći ću to i uputiti vas negde bolje.",
+        name: "Odgovaramo — u roku od jednog dana",
+        body: "Lični odgovor u roku od jednog radnog dana, obično u roku od nekoliko sati: iskrena procena uklapanja, gruba forma i pravi sledeći korak. Ako nismo pravi izbor, reći ćemo to i uputiti vas negde bolje.",
       },
       {
         name: "Definišemo obim",
@@ -333,7 +333,7 @@ const sr = {
       },
     ],
     plainEmailPre: "Više volite običan email? Pišite na ",
-    plainEmailMid: " — ista osoba, isto obećanje. Želite prvo celu sliku? Pročitajte ",
+    plainEmailMid: " — isti tim, isto obećanje. Želite prvo celu sliku? Pročitajte ",
     plainEmailLink: "kako saradnja funkcioniše",
     plainEmailPost: ".",
   },
@@ -359,7 +359,7 @@ const sr = {
       "Priča, principi i standardi iza noqyris — nezavisnog softverskog studija koji isporučuje sopstvene SaaS proizvode i gradi aplikacije po meri i AI sisteme za klijente.",
     eyebrow: "O studiju",
     h1: { pre: "Jedan studio, jedan ", em: "standard", post: "." },
-    lead: "{name} je nezavisni softverski studio koji vodi {founder} — programer koji isporučuje SaaS proizvode pod imenom studija i gradi aplikacije po meri i AI sisteme za klijente širom sveta.",
+    lead: "{name} je nezavisni softverski studio koji isporučuje sopstvene SaaS proizvode pod svojim imenom i gradi aplikacije po meri i AI sisteme za klijente širom sveta.",
     para2:
       "Proizvodi i rad sa klijentima su jedna praksa. Alati, infrastruktura i prosuđivanje izoštreni vođenjem pravih proizvoda direktno ulaze u klijentske projekte — a klijentski problemi drže proizvode iskrenim.",
     howWeWork: "Kako to funkcioniše",
@@ -421,7 +421,7 @@ const sr = {
     optional: "opciono",
     building: "Šta gradite?",
     budget: "Budžet",
-    budgetHint: "stvaran raspon mi pomaže da pravilno odredim obim",
+    budgetHint: "stvaran raspon nam pomaže da pravilno odredimo obim",
     timeline: "Vremenski okvir",
     description: "Šta bi trebalo da postoji a još ne postoji?",
     descriptionHint: "nekoliko rečenica je sasvim dovoljno (najviše {max} karaktera)",
@@ -503,7 +503,7 @@ const sr = {
     },
     start: {
       alt: "Pokreni projekat sa noqyris",
-      title: "Recite mi šta",
+      title: "Recite nam šta",
       em: "gradite.",
       subtitle: "Odgovor u roku od jednog radnog dana",
     },

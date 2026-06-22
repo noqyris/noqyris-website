@@ -1,6 +1,5 @@
 import type {
   Organization,
-  Person,
   Service as ServiceSchema,
   BreadcrumbList,
   WebSite,
@@ -25,7 +24,6 @@ export function organizationJsonLd(lang: Locale): WithContext<Organization> {
     // Raster logo (Google's logo guidelines prefer PNG over SVG).
     logo: `${site.url}/icon-512.png`,
     foundingDate: "2026",
-    founder: { "@type": "Person", name: site.founder },
     sameAs: site.socials.map((s) => s.url),
   };
 }
@@ -53,17 +51,6 @@ export function faqPageJsonLd(faqs: ServiceFaq[]): WithContext<FAQPage> {
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
-  };
-}
-
-export function personJsonLd(lang: Locale): WithContext<Person> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: site.founder,
-    worksFor: { "@id": `${site.url}/#organization` },
-    url: `${site.url}${localePath("/about", lang)}`,
-    sameAs: site.socials.map((s) => s.url),
   };
 }
 

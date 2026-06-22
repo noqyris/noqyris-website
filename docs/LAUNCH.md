@@ -40,7 +40,7 @@ and account/infra setup**, plus a few optional polish items.
 - [ ] **Confirm the SR rewrites** — I changed three first-person strings to
       company voice (`sr.ts`: `productStrip.h1`, `openPage` stat label,
       `og.home.em`). Confirm the Serbian phrasing as a native speaker.
-- [ ] **Domain email** — `site.email` is `contact@noqyris.com`. Set up that mailbox.
+- [ ] **Domain email** — `site.email` is `team@noqyris.com`. Set up that mailbox.
 - [ ] **Social handles** — register every `@noqyris` handle in `site.ts` before
       the links go live; upload the regenerated `brand/` assets. Trim
       `site.socials` to the platforms you'll actually seed.

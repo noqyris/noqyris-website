@@ -505,7 +505,8 @@ textarea:focus-visible {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: var(--color-bg);
+  /* black to match the video's letterbox so `contain` is seamless */
+  background: #000;
   overflow: hidden;
   /* the intro video plays, then the curtain rises to reveal the site */
   animation: splash-curtain 0.72s cubic-bezier(0.76, 0, 0.24, 1) 4.7s forwards;
@@ -515,7 +516,8 @@ textarea:focus-visible {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* contain (not cover) so the wordmark is never cropped on portrait phones */
+  object-fit: contain;
 }
 
 /* Pre-paint gate (inline script in the root layout) and reduced motion both
