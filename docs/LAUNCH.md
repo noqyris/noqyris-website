@@ -41,6 +41,11 @@ and account/infra setup**, plus a few optional polish items.
       company voice (`sr.ts`: `productStrip.h1`, `openPage` stat label,
       `og.home.em`). Confirm the Serbian phrasing as a native speaker.
 - [ ] **Domain email** — `site.email` is `team@noqyris.com`. Set up that mailbox.
+- [ ] **Contact form delivery** — the `/start` form POSTs to `/api/contact`,
+      which emails the brief via Resend. Create a [Resend](https://resend.com)
+      account, verify the `noqyris.com` domain, then set `RESEND_API_KEY` (and
+      optionally `CONTACT_TO` / `CONTACT_FROM`) in `.env.local` and Vercel — see
+      `.env.example`. Until the key is set, the form falls back to `mailto:`.
 - [ ] **Social handles** — register every `@noqyris` handle in `site.ts` before
       the links go live; upload the regenerated `brand/` assets. Trim
       `site.socials` to the platforms you'll actually seed.

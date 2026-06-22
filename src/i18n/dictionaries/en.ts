@@ -419,6 +419,7 @@ const en = {
 
   form: {
     name: "Your name",
+    email: "Your email",
     company: "Company",
     optional: "optional",
     building: "What are you building?",
@@ -428,6 +429,7 @@ const en = {
     description: "What should exist that doesn't yet?",
     descriptionHint: "a few sentences is plenty (max {max} characters)",
     namePlaceholder: "Ada Lovelace",
+    emailPlaceholder: "ada@example.com",
     companyPlaceholder: "Analytical Engines Ltd",
     descriptionPlaceholder:
       "The problem, who has it, and what you've tried so far. Links welcome.",
@@ -447,12 +449,15 @@ const en = {
     ],
     timelineOptions: ["As soon as possible", "Within 1–3 months", "Flexible"],
     send: "Send the brief",
+    sending: "Sending…",
+    sent: "Thanks — your brief is in. We'll reply within one business day.",
+    error: "That didn't send. Copy the brief above, or write straight to",
     copyInstead: "Copy the brief instead",
     copied: "Copied",
     sentHint:
       "Your mail app should open with the brief ready to send. If nothing happened, copy it above or write straight to",
     footerHelper:
-      "Sending opens your own mail app — nothing is stored on this site. ",
+      "Your brief comes straight to our inbox — nothing else is stored. ",
     briefName: "Name",
     briefCompany: "Company",
     briefLooking: "Looking for",

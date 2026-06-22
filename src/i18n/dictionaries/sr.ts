@@ -417,6 +417,7 @@ const sr = {
 
   form: {
     name: "Vaše ime",
+    email: "Vaš email",
     company: "Kompanija",
     optional: "opciono",
     building: "Šta gradite?",
@@ -426,6 +427,7 @@ const sr = {
     description: "Šta bi trebalo da postoji a još ne postoji?",
     descriptionHint: "nekoliko rečenica je sasvim dovoljno (najviše {max} karaktera)",
     namePlaceholder: "Ada Lovelace",
+    emailPlaceholder: "ada@primer.com",
     companyPlaceholder: "Analytical Engines Ltd",
     descriptionPlaceholder:
       "Problem, ko ga ima i šta ste do sada probali. Linkovi su dobrodošli.",
@@ -445,12 +447,15 @@ const sr = {
     ],
     timelineOptions: ["Što pre moguće", "U roku od 1–3 meseca", "Fleksibilno"],
     send: "Pošalji brief",
+    sending: "Šaljem…",
+    sent: "Hvala — brief je stigao. Odgovaramo u roku od jednog radnog dana.",
+    error: "Slanje nije uspelo. Kopirajte brief iznad ili pišite direktno na",
     copyInstead: "Umesto toga kopiraj brief",
     copied: "Kopirano",
     sentHint:
       "Trebalo bi da se otvori vaša mail aplikacija sa spremnim brief-om. Ako se ništa nije desilo, kopirajte ga iznad ili pišite direktno na",
     footerHelper:
-      "Slanje otvara vašu sopstvenu mail aplikaciju — ništa se ne čuva na ovom sajtu. ",
+      "Vaš brief stiže direktno u naš inbox — ništa drugo se ne čuva. ",
     briefName: "Ime",
     briefCompany: "Kompanija",
     briefLooking: "Tražim",
