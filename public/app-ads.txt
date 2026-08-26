@@ -1,1 +1,32 @@
-google.com, pub-3307486877162157, DIRECT, f08c47fec0942fa0
+# app-ads.txt — noqyris.com (IAB Authorized Sellers for Apps 1.0)
+#
+# This file used to contain exactly one line:
+#
+#   google.com, pub-3307486877162157, DIRECT, f08c47fec0942fa0
+#
+# Google TERMINATED that publisher account on 2026-08-18 for invalid traffic
+# and refused the appeal the next day, final, with the balance unpaid and new
+# accounts barred. A present DIRECT line is a live public claim that the account
+# may sell this inventory — so it was not stale config, it was a false
+# declaration. Do not re-add it, in any app, under any name.
+#
+# WHAT THIS DOMAIN COVERS
+# The file is read from the root of whatever developer website an app's store
+# listing names. Apps pointing at noqyris.com read THIS file. KVIZKO does not —
+# its listing points at noqyris.github.io, which carries its own file with the
+# live Unity line and the reseller list.
+#
+# WHY THERE ARE NO SELLERS LISTED RIGHT NOW
+# The apps on this domain have no live ad network. The LevelPlay account holds
+# KVIZKO only. Listing a seller that does not actually sell this inventory would
+# be the same kind of untrue claim the Google line was, so the file authorises
+# nobody until that changes.
+#
+# WHEN AN APP HERE GOES LIVE ON LEVELPLAY
+# Add Unity's DIRECT line first, then the reseller list the dashboard reports
+# under Monetization → Settings → App-ads.txt → missing sellers. That list is
+# authoritative for the account; paste whatever it still reports as missing.
+#
+#   unity.com, 144007920, DIRECT, 96cabb5fbdde37a7
+#
+# Crawlers re-read this roughly weekly, so allow days for a change to register.
