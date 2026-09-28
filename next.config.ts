@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  async rewrites() {
+    // Next serves public/ files only at their exact path, so the Shapling support
+    // page (public/shapling/index.html) needs this to answer at /shapling.
+    return [{ source: "/shapling", destination: "/shapling/index.html" }];
+  },
   async redirects() {
     // /open was folded into /changelog — keep old links and shares alive.
     return [
@@ -37,6 +42,20 @@ const nextConfig: NextConfig = {
         source: "/sr/products/:slug*",
         destination: "/sr/changelog",
         permanent: false,
+      },
+      // Shapling's pages are static files in public/shapling/. Builds made before the
+      // rename point at /sapa/privacy.html (its working title), and the extensionless
+      // /shapling/privacy is the address people type — both land on the one policy.
+      { source: "/sapa", destination: "/shapling", permanent: true },
+      {
+        source: "/sapa/privacy.html",
+        destination: "/shapling/privacy.html",
+        permanent: true,
+      },
+      {
+        source: "/shapling/privacy",
+        destination: "/shapling/privacy.html",
+        permanent: true,
       },
     ];
   },
